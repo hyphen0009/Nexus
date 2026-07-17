@@ -1,0 +1,13 @@
+
+> game-tournament@0.1.0 dev
+> next dev --port 3000
+
+▲ Next.js 16.2.10 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.17:3000
+- Environments: .env
+✓ Ready in 939ms
+Creating turbopack project { dir: 'D:\\Hyphen\\game-tournament', testMode: true }
+
+ GET / 200 in 1635ms (next.js: 272ms, application-code: 1364ms)
+ GET /api/auth/session 200 in 130ms (next.js: 92ms, application-code: 38ms)
