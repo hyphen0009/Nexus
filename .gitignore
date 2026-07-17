@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+.codex-run/
 
 # production
 /build
@@ -32,6 +33,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+memory.md
+prisma/dev.db
+public/uploads/
 
 # vercel
 .vercel
