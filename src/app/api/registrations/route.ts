@@ -1,6 +1,4 @@
 import { randomUUID } from 'crypto';
-import { mkdir, writeFile } from 'fs/promises';
-import path from 'path';
 import { NextResponse } from 'next/server';
 import { authErrorResponse, isSafeOrigin, requireUser } from '@/lib/auth';
 import { getRegistrationForUser } from '@/lib/data';
@@ -161,13 +159,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'The uploaded file does not look like a valid JPG or PNG image.' }, { status: 400 });
     }
 
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'payment-proofs');
-    await mkdir(uploadDir, { recursive: true });
-
     const fileName = `${Date.now()}-${randomUUID()}-${safeFileName(proof.name)}`;
-    const diskPath = path.join(uploadDir, fileName);
-    const publicPath = `/uploads/payment-proofs/${fileName}`;
-    await writeFile(diskPath, fileBytes);
+    const proofDataUrl = `data:${proof.type};base64,${fileBytes.toString('base64')}`;
 
     const registrationData = {
       teamName,
@@ -179,8 +172,8 @@ export async function POST(request: Request) {
       game: tournament.game,
       matchType: tournament.matchType,
       entryFee: tournament.entryFee,
-      paymentScreenshot: publicPath,
-      paymentScreenshotName: proof.name,
+      paymentScreenshot: proofDataUrl,
+      paymentScreenshotName: fileName,
       paymentStatus: 'PENDING' as const,
       status: 'PENDING' as const,
       submittedAt: new Date(),

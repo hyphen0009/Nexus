@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum TournamentStatus {
+  UPCOMING
+  LIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum NotificationType {
+  REGISTRATION_SUBMITTED
+  REGISTRATION_APPROVED
+  REGISTRATION_REJECTED
+  TOURNAMENT_UPDATED
+  MATCH_STARTING_SOON
+  TOURNAMENT_CANCELLED
+}
+
+model User {
+  id           String         @id @default(cuid())
+  username     String
+  fullName     String
+  email        String         @unique
+  phone        String?
+  passwordHash String
+  role         Role           @default(USER)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  registrations Registration[]
+  notifications Notification[]
+}
+
+model Tournament {
+  id                   String           @id @default(cuid())
+  title                String
+  description          String
+  game                 String
+  matchType            String
+  prizePool            String
+  entryFee             Int
+  bannerImage          String
+  gameLogo             String?
+  registrationDeadline DateTime
+  tournamentDate       DateTime
+  startTime            String
+  maxPlayers           Int
+  rules                String
+  map                  String
+  platform             String
+  discordLink          String?
+  whatsappLink         String?
+  paymentUrl           String
+  upiId                String?
+  qrCodeImage          String?
+  paymentInstructions  String
+  paymentDeadline      DateTime
+  status               TournamentStatus @default(UPCOMING)
+  isPublished          Boolean          @default(true)
+  isArchived           Boolean          @default(false)
+  createdAt            DateTime         @default(now())
+  updatedAt            DateTime         @updatedAt
+
+  registrations Registration[]
+}
+
+model Registration {
+  id                    String             @id @default(cuid())
+  userId                String
+  tournamentId          String
+  teamName              String             @default("")
+  username              String
+  fullName              String
+  email                 String
+  phone                 String
+  tournamentName        String
+  game                  String
+  matchType             String
+  entryFee              Int
+  paymentScreenshot     String
+  paymentScreenshotName String
+  paymentStatus         RegistrationStatus @default(PENDING)
+  status                RegistrationStatus @default(PENDING)
+  submittedAt           DateTime           @default(now())
+  registrationDate      DateTime           @default(now())
+  reviewedAt            DateTime?
+  reviewerNote          String?
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+
+  user       User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tournament Tournament             @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  teammates  RegistrationTeammate[]
+
+  @@unique([userId, tournamentId])
+  @@index([status, submittedAt])
+  @@index([tournamentId, status])
+}
+
+model RegistrationTeammate {
+  id             String       @id @default(cuid())
+  registrationId String
+  name           String
+  gameName       String
+  uid            String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  registration Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+
+  @@index([registrationId])
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  title     String
+  message   String
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}

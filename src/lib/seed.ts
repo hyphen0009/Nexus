@@ -13,13 +13,6 @@ async function seedDatabase() {
   const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@nexcup.gg';
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? 'Admin12345!';
 
-  await prisma.registration.deleteMany({});
-  await prisma.notification.deleteMany({});
-  await prisma.tournament.deleteMany({});
-  await prisma.user.deleteMany({
-    where: { role: { not: Role.ADMIN } },
-  });
-
   const existingAdmin = await prisma.user.findUnique({
     where: { email: adminEmail.toLowerCase() },
   });

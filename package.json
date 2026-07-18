@@ -5,9 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:netlify": "prisma db push --schema prisma/schema.netlify.prisma && prisma generate --schema prisma/schema.netlify.prisma && next build",
     "start": "next start",
     "lint": "eslint",
     "db:push": "prisma db push",
+    "db:push:netlify": "prisma db push --schema prisma/schema.netlify.prisma",
     "db:generate": "prisma generate",
     "postinstall": "prisma generate"
   },
