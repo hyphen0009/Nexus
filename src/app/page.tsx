@@ -14,7 +14,8 @@ export default async function Home() {
             <span className="eyebrow">Tournament platform</span>
             <span className="session-chip">Squad mode</span>
           </div>
-          <h1>Registered teams</h1>
+          <h1>NexCup</h1>
+          <p>Find live cups, register your squad, and keep approved teams in view on match day.</p>
           <div className="hero-actions">
             <Link href="/tournaments" className="btn-primary">
               Browse Tournaments

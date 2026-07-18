@@ -36,20 +36,20 @@ export default function Navbar() {
       void syncSession();
     };
 
-    window.addEventListener('nexus-auth-change', handleAuthChange);
-    return () => window.removeEventListener('nexus-auth-change', handleAuthChange);
+    window.addEventListener('nexcup-auth-change', handleAuthChange);
+    return () => window.removeEventListener('nexcup-auth-change', handleAuthChange);
   }, []);
 
   const mobileLinks = sessionUser
     ? [
         { href: '/', label: 'Home' },
-        { href: '/tournaments', label: 'Games' },
-        { href: '/my-registrations', label: 'My Team' },
+        { href: '/tournaments', label: 'Cups' },
+        { href: '/my-registrations', label: 'Entries' },
         { href: '/profile', label: 'Profile' },
       ]
     : [
         { href: '/', label: 'Home' },
-        { href: '/tournaments', label: 'Games' },
+        { href: '/tournaments', label: 'Cups' },
         { href: '/login', label: 'Login' },
         { href: '/register', label: 'Join' },
       ];
@@ -58,10 +58,10 @@ export default function Navbar() {
     <>
       <nav className="navbar container">
         <div className="navbar-brand-row">
-          <Link href="/" className="navbar-brand" aria-label="Nexus home">
-            Nexus
+          <Link href="/" className="navbar-brand" aria-label="NexCup home">
+            NexCup
           </Link>
-          <span className="navbar-tag">Tournament hub</span>
+          <span className="navbar-tag">Cup arena</span>
         </div>
 
         <div className="navbar-main">
@@ -109,6 +109,16 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
+
+      <div className="mobile-topbar">
+        <Link href="/" className="mobile-brand" aria-label="NexCup home">
+          NexCup
+        </Link>
+        <div className="mobile-topbar-meta">
+          <span>Cup arena</span>
+          {!loading && sessionUser && <strong>{sessionUser.username}</strong>}
+        </div>
+      </div>
 
       {!loading && (
         <nav className="mobile-nav" aria-label="Primary">

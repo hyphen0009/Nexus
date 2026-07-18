@@ -39,7 +39,7 @@ export default function RegisterPage() {
       return;
     }
 
-    window.dispatchEvent(new Event('nexus-auth-change'));
+    window.dispatchEvent(new Event('nexcup-auth-change'));
     router.push('/my-registrations');
     router.refresh();
   };
@@ -58,7 +58,7 @@ export default function RegisterPage() {
           <input
             type="text"
             className="input-field"
-            placeholder="NexusPlayer"
+            placeholder="NexCupPlayer"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             required

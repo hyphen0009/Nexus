@@ -7,7 +7,7 @@ export default function LogoutButton() {
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
-    window.dispatchEvent(new Event('nexus-auth-change'));
+    window.dispatchEvent(new Event('nexcup-auth-change'));
     router.push('/');
     router.refresh();
   };

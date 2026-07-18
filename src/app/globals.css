@@ -173,6 +173,10 @@ textarea {
   display: none;
 }
 
+.mobile-topbar {
+  display: none;
+}
+
 .mobile-nav-link {
   color: var(--text-secondary);
 }
@@ -900,14 +904,53 @@ textarea:focus-visible {
   }
 
   .site-header {
-    position: static;
-    background: transparent;
-    border-bottom: 0;
-    backdrop-filter: none;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(16, 19, 20, 0.94);
+    border-bottom: 1px solid rgba(53, 65, 67, 0.8);
+    backdrop-filter: blur(14px);
   }
 
   .navbar {
     display: none;
+  }
+
+  .mobile-topbar {
+    width: min(var(--content-width), calc(100% - 1rem));
+    min-height: 62px;
+    margin: 0 auto;
+    padding: calc(0.55rem + env(safe-area-inset-top)) 0 0.55rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .mobile-brand {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    line-height: 1;
+  }
+
+  .mobile-topbar-meta {
+    min-width: 0;
+    display: grid;
+    gap: 0.1rem;
+    text-align: right;
+    color: var(--text-tertiary);
+    font-size: 0.76rem;
+    line-height: 1.2;
+  }
+
+  .mobile-topbar-meta strong {
+    max-width: 44vw;
+    overflow: hidden;
+    color: var(--accent-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .stats-grid,
@@ -924,9 +967,119 @@ textarea:focus-visible {
     grid-template-columns: 1fr;
   }
 
+  .page-shell {
+    gap: 1rem;
+  }
+
+  .page-intro,
+  .hero-stage,
+  .detail-hero,
+  .glass-panel,
+  .tournament-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .page-intro,
+  .hero-stage,
+  .detail-hero,
+  .content-card,
+  .payment-panel,
+  .auth-panel,
+  .profile-card {
+    padding: 1rem;
+  }
+
+  .page-intro,
+  .detail-hero,
+  .glass-panel {
+    box-shadow: none;
+  }
+
+  .page-intro h1,
+  .detail-hero h1 {
+    font-size: clamp(1.85rem, 9vw, 2.5rem);
+  }
+
+  .hero-stage {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: min(560px, calc(100svh - 8rem));
+    align-content: end;
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .hero-stage::before,
+  .hero-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .hero-stage::before {
+    z-index: -2;
+    background-image: url("/assets/esports-arena-banner.png");
+    background-position: center;
+    background-size: cover;
+    opacity: 0.48;
+  }
+
+  .hero-stage::after {
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(16, 19, 20, 0.2), rgba(16, 19, 20, 0.92) 58%, rgba(16, 19, 20, 0.98)),
+      linear-gradient(135deg, rgba(134, 242, 177, 0.2), transparent 55%);
+  }
+
+  .hero-stage h1 {
+    font-size: clamp(2.75rem, 16vw, 4.5rem);
+  }
+
+  .hero-stage p {
+    color: #dfe9e3;
+    font-size: 0.98rem;
+  }
+
+  .hero-kicker {
+    gap: 0.5rem;
+  }
+
+  .hero-kicker .session-chip {
+    min-height: 30px;
+    padding-inline: 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .team-board {
+    padding: 0.85rem;
+    background: rgba(19, 24, 26, 0.86);
+    backdrop-filter: blur(8px);
+  }
+
+  .team-board-list {
+    max-height: 210px;
+    overflow: auto;
+    padding-right: 0.15rem;
+  }
+
+  .team-board-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.7rem;
+  }
+
+  .team-board-row strong,
+  .team-board-row span {
+    overflow-wrap: anywhere;
+  }
+
   .section-header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 0.65rem;
   }
 
   .hero-actions,
@@ -937,6 +1090,75 @@ textarea:focus-visible {
   .hero-actions > *,
   .admin-actions > * {
     width: 100%;
+  }
+
+  .btn-primary,
+  .btn-neon {
+    min-height: 48px;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .compact-button {
+    min-height: 44px;
+  }
+
+  .input-field {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  textarea.input-field {
+    min-height: 108px;
+  }
+
+  .metric-card {
+    padding: 0.9rem;
+  }
+
+  .metric-card strong {
+    overflow-wrap: anywhere;
+    font-size: 1.35rem;
+  }
+
+  .card-banner {
+    aspect-ratio: 16 / 10;
+  }
+
+  .card-body {
+    gap: 0.75rem;
+  }
+
+  .card-body h2,
+  .card-body h3 {
+    font-size: 1.2rem;
+  }
+
+  .card-body p {
+    font-size: 0.95rem;
+  }
+
+  .card-stats {
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+
+  .card-stats span {
+    padding: 0.42rem 0.55rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+  }
+
+  .pill {
+    min-height: 26px;
+    padding-inline: 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  .detail-hero > img {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
   }
 
   .detail-main-layout {
@@ -957,8 +1179,76 @@ textarea:focus-visible {
   }
 
   .main-content {
-    padding-top: 1rem;
-    padding-bottom: 5.25rem;
+    padding-top: 0.85rem;
+    padding-bottom: calc(6.5rem + env(safe-area-inset-bottom));
+  }
+
+  .site-footer {
+    padding-bottom: calc(6.5rem + env(safe-area-inset-bottom));
+    font-size: 0.85rem;
+  }
+
+  .site-footer-content,
+  .site-footer-links {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .dashboard-row,
+  .participant-row,
+  .admin-registration-card,
+  .tournament-admin-row {
+    gap: 0.75rem;
+    align-items: start;
+    padding: 0.9rem;
+  }
+
+  .dashboard-row > div,
+  .participant-row > div,
+  .admin-registration-card > div,
+  .tournament-admin-row > div {
+    min-width: 0;
+  }
+
+  .dashboard-row strong,
+  .participant-row strong,
+  .admin-registration-card h3,
+  .tournament-admin-row h3,
+  .profile-card strong {
+    overflow-wrap: anywhere;
+  }
+
+  .dashboard-row .text-link,
+  .participant-row > span {
+    justify-self: start;
+  }
+
+  .admin-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .admin-actions > * {
+    flex: 1 1 130px;
+  }
+
+  .proof-thumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .proof-thumb img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .auth-panel {
+    width: 100%;
+    margin: 0;
+  }
+
+  .empty-state {
+    padding: 2rem 1rem;
   }
 
   .mobile-nav {
@@ -970,10 +1260,11 @@ textarea:focus-visible {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 0.35rem;
-    padding: 0.55rem;
+    padding: 0.55rem 0.55rem calc(0.55rem + env(safe-area-inset-bottom));
     background: rgba(16, 19, 20, 0.96);
     border-top: 1px solid var(--border-color);
     backdrop-filter: blur(12px);
+    box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.32);
   }
 
   .mobile-nav-link {
@@ -982,16 +1273,29 @@ textarea:focus-visible {
     min-height: 44px;
     padding: 0.4rem 0.5rem;
     border: 1px solid transparent;
-    border-radius: 10px;
+    border-radius: var(--radius-md);
     color: var(--text-secondary);
     font-size: 0.82rem;
+    font-weight: 700;
     line-height: 1.1;
     text-align: center;
+    min-width: 0;
   }
 
   .mobile-nav-link[data-active="true"] {
     background: var(--accent-primary-soft);
     color: var(--accent-primary);
     border-color: rgba(134, 242, 177, 0.22);
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-nav-link {
+    font-size: 0.76rem;
+    padding-inline: 0.25rem;
+  }
+
+  .hero-stage {
+    min-height: auto;
   }
 }

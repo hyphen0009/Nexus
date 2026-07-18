@@ -3,12 +3,12 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Nexus Tournaments | Premium Game Tournaments",
+  title: "NexCup | Premium Game Tournaments",
   description: "Register for premium game tournaments, create teams, and track your match history.",
-  keywords: ["gaming tournaments", "esports", "team registration", "Nexus Tournaments"],
-  authors: [{ name: "Nexus Tournaments" }],
+  keywords: ["gaming tournaments", "esports", "team registration", "NexCup"],
+  authors: [{ name: "NexCup" }],
   openGraph: {
-    title: "Nexus Tournaments",
+    title: "NexCup",
     description: "Register teams, browse tournaments, and review registered rosters in a premium gamer dashboard.",
     type: "website",
   },
@@ -31,7 +31,7 @@ export default function RootLayout({
         <footer className="site-footer">
           <div className="container">
             <div className="site-footer-content">
-              <p>&copy; {new Date().getFullYear()} Nexus Tournaments</p>
+              <p>&copy; {new Date().getFullYear()} NexCup</p>
               <div className="site-footer-links">
                 <a href="/terms-and-conditions">Terms and Conditions</a>
               </div>

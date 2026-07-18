@@ -10,7 +10,7 @@ export function ensureSeedData() {
 }
 
 async function seedDatabase() {
-  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@nexus.gg';
+  const adminEmail = process.env.SEED_ADMIN_EMAIL ?? 'admin@nexcup.gg';
   const adminPassword = process.env.SEED_ADMIN_PASSWORD ?? 'Admin12345!';
 
   await prisma.registration.deleteMany({});
@@ -28,7 +28,7 @@ async function seedDatabase() {
     await prisma.user.create({
       data: {
         username: 'Admin',
-        fullName: 'Nexus Admin',
+        fullName: 'NexCup Admin',
         email: adminEmail.toLowerCase(),
         phone: '+91 99999 99999',
         role: Role.ADMIN,

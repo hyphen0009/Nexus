@@ -20,7 +20,7 @@ type SessionPayload = {
   exp: number;
 };
 
-const SESSION_COOKIE = 'nexus_session';
+const SESSION_COOKIE = 'nexcup_session';
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;
 
 function getAuthSecret() {

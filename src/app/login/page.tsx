@@ -38,7 +38,7 @@ export default function LoginPage() {
       return;
     }
 
-    window.dispatchEvent(new Event('nexus-auth-change'));
+    window.dispatchEvent(new Event('nexcup-auth-change'));
     router.push(nextPath === '/my-registrations' && payload.user.role === 'ADMIN' ? '/admin' : nextPath);
     router.refresh();
   };
@@ -84,7 +84,7 @@ export default function LoginPage() {
       </form>
 
       <p>
-        New to Nexus? <Link href="/register" className="text-link">Create an account</Link>
+        New to NexCup? <Link href="/register" className="text-link">Create an account</Link>
       </p>
     </div>
   );
