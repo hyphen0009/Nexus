@@ -4,12 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:netlify": "prisma db push --schema prisma/schema.netlify.prisma && prisma generate --schema prisma/schema.netlify.prisma && next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "db:push": "prisma db push",
-    "db:push:netlify": "prisma db push --schema prisma/schema.netlify.prisma",
     "db:generate": "prisma generate",
     "postinstall": "prisma generate"
   },
@@ -21,6 +19,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.12",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
